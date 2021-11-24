@@ -1,16 +1,78 @@
 on: [push]
 
-# TODO: maybe make reusable workflow?
-
 jobs:
   wuphf_push_notification:
+    strategy:
+      matrix:
+        service: [
+          APPRISE_Apprise_API,
+          APPRISE_Boxcar,
+          APPRISE_Discord,
+          APPRISE_Emby,
+          APPRISE_Enigma2,
+          APPRISE_Faast,
+          APPRISE_FCM,
+          APPRISE_Flock,
+          APPRISE_Gitter,
+          APPRISE_Google_Chat,
+          APPRISE_Gotify,
+          APPRISE_Growl,
+          APPRISE_Home_Assistant,
+          APPRISE_IFTTT,
+          APPRISE_Join,
+          APPRISE_KODI,
+          APPRISE_Kumulos,
+          APPRISE_LaMetric_Time,
+          APPRISE_Mailgun,
+          APPRISE_Matrix,
+          APPRISE_Mattermost,
+          APPRISE_Microsoft_Teams,
+          APPRISE_MQTT,
+          APPRISE_Nextcloud,
+          APPRISE_Notica,
+          APPRISE_Notifico,
+          APPRISE_Office_365,
+          APPRISE_OneSignal,
+          APPRISE_Opsgenie,
+          APPRISE_ParsePlatform,
+          APPRISE_PopcornNotify,
+          APPRISE_Prowl,
+          APPRISE_PushBullet,
+          APPRISE_Pushjet,
+          APPRISE_Push_(Techulus),
+          APPRISE_Pushed,
+          APPRISE_Pushover,
+          APPRISE_PushSafer,
+          APPRISE_Reddit,
+          APPRISE_Rocket.Chat,
+          APPRISE_Ryver,
+          APPRISE_SendGrid,
+          APPRISE_SimplePush,
+          APPRISE_Slack,
+          APPRISE_SMTP2Go,
+          APPRISE_Streamlabs,
+          APPRISE_SparkPost,
+          APPRISE_Spontit,
+          APPRISE_Syslog,
+          APPRISE_Telegram,
+          APPRISE_Twitter,
+          APPRISE_Twist,
+          APPRISE_XBMC,
+          APPRISE_XMPP,
+          APPRISE_Webex_Teams_(Cisco),
+          APPRISE_Zulip_Chat
+        ]
+    env:
+      apprise-url: ${{secrets[matrix.service]}}
+
     runs-on: ubuntu-latest
-    name: send WUPHF notifications on push
+
     steps:
       - name: wuphf_push_notification
         uses: cstuder/apprise-ga@master
         with:
-          title: "Push received on {{ ref }}"
+          title: "Push received on {{ ref }} "
           message: "Commit by {{ head_commit.author.name }}: {{ head_commit.message | truncate(128) }} ({{ head_commit.id[0:7] }})"
         env:
-          APPRISE_URL: ${{ secrets.APPRISE_URL }}
+          APPRISE_URL: ${{ env.apprise-url }}
+
