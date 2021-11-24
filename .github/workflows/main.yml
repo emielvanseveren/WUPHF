@@ -4,7 +4,7 @@ jobs:
   wuphf_push_notification:
     strategy:
       matrix:
-        token: [
+        service: [
           APPRISE_SLACK, 
           APPRISE_DISCORD, 
           APPRISE_TELEGRAM, 
@@ -17,18 +17,18 @@ jobs:
           APPRISE_MSTEAMS, 
         ]
     env:
-      apprise-url: ${{secrets[matrix.token]}}
+      apprise-url: ${{secrets[matrix.service]}}
 
     runs-on: ubuntu-latest
 
     steps:
-      - run: echo ${{matrix.token}}
-      - run: echo ${{ matrix.apprise-url }} | base64
+      - run: echo ${{matrix.service}}
+      - run: echo ${{ env.apprise-url }} | base64
       - name: wuphf_push_notification
         uses: cstuder/apprise-ga@master
         with:
           title: "Push received on {{ ref }} "
           message: "Commit by {{ head_commit.author.name }}: {{ head_commit.message | truncate(128) }} ({{ head_commit.id[0:7] }})"
         env:
-          APPRISE_URL: ${{ matrix.apprise-url }}
+          APPRISE_URL: ${{ env.apprise-url }}
 
