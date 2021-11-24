@@ -1,16 +1,23 @@
 on: [push]
 
-# TODO: maybe make reusable workflow?
-
 jobs:
   wuphf_push_notification:
+    strategy:
+      matrix:
+        static: [10, 12, 14]
+        dynamic: ${{ secrets.EMIEL_STINKT }}
     runs-on: ubuntu-latest
-    name: send WUPHF notifications on push
+
     steps:
-      - name: wuphf_push_notification
-        uses: cstuder/apprise-ga@master
-        with:
-          title: "Push received on {{ ref }}"
-          message: "Commit by {{ head_commit.author.name }}: {{ head_commit.message | truncate(128) }} ({{ head_commit.id[0:7] }})"
-        env:
-          APPRISE_URL: ${{ secrets.APPRISE_URL }}
+      - run: 'echo "Static matrix: ${{ matrix.static }}"'
+      - run: 'echo "Dynamic matrix: ${{ matrix.dynamic }}"'
+
+#    name: send WUPHF notifications on push
+#    steps:
+#      - name: wuphf_push_notification
+#        uses: cstuder/apprise-ga@master
+#        with:
+#          title: "Push received on {{ ref }} "
+#          message: "Commit by {{ head_commit.author.name }}: {{ head_commit.message | truncate(128) }} ({{ head_commit.id[0:7] }})"
+#        env:
+#          APPRISE_URL: ${{ matrix.apprise-url }}
