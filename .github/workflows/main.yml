@@ -25,12 +25,11 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       services: ${{ steps.generate-matrix.outputs.services }}
-      versions: ${{ steps.generate-matrix.outputs.versions }}
     steps:
       - name: Generate Matrix
         id: generate-matrix
         run: |
-          SERVICES='${{ toJSON(github.secrets.EMIEL_STINKT) }}'
+          SERVICES='${{ toJSON(secrets.EMIEL_STINKT) }}'
           echo ::set-output name=services::${SERVICES}
   # ------------------------
   my_echo:
