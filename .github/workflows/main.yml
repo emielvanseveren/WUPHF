@@ -22,6 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: echo ${{matrix.token}}
       - run: echo ${{ matrix.apprise-url }} | base64
       - name: wuphf_push_notification
         uses: cstuder/apprise-ga@master
