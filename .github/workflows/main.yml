@@ -5,10 +5,26 @@ jobs:
     strategy:
       matrix:
         static: [10, 12, 14]
+        token: [
+          EMIEL_STINKT,
+          APPRISE_SLACK, 
+          APPRISE_DISCORD, 
+          APPRISE_TELEGRAM, 
+          APPRISE_EMAIL,
+          APPRISE_SMS, 
+          APPRISE_WEBHOOK, 
+          APPRISE_PUSHOVER, 
+          APPRISE_TWILIO, 
+          APPRISE_HIPCHAT, 
+          APPRISE_MSTEAMS, 
+        ]
+    env:
+      apprise-url: ${{secrets[matrix.token]}}
+
     runs-on: ubuntu-latest
 
     steps:
-      - run: 'echo "Static matrix: ${{ matrix.static }}"'
+      - run: 'echo "matrix: ${{ env.apprise-url }}"'
 
 #    name: send WUPHF notifications on push
 #    steps:
@@ -20,35 +36,3 @@ jobs:
 #        env:
 #          APPRISE_URL: ${{ matrix.apprise-url }}
 
- # ------------------------
-  say_hello:
-    runs-on: ubuntu-latest
-    outputs:
-      services: ${{ steps.generate-matrix.outputs.services }}
-    steps:
-      - name: Generate Matrix
-        id: generate-matrix
-        run: |
-          SERVICES='${{ toJSON(secrets.EMIEL_STINKT) }}'
-          echo ::set-output name=services::${SERVICES}
-  # ------------------------
-  my_echo:
-    runs-on: ubuntu-latest
-    needs:
-      - say_hello
-    steps:
-      - name: Echo previous outputs
-        run: echo "${{ toJSON(needs.say_hello.outputs) }}"
-  # ------------------------
-  my_matrix:
-    runs-on: ubuntu-latest
-    needs:
-      - my_echo
-      - say_hello
-    strategy:
-      matrix:
-        service: ${{ fromJSON(needs.say_hello.outputs.services) }}
-    steps:
-      - name: Matrix => (${{ matrix.service }})
-        run: |
-          echo ${{ matrix.service }}
