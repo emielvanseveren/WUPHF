@@ -6,4 +6,4 @@ Our representatives **Michael** and **Ryan** explain it in the video below [sour
 
 https://user-images.githubusercontent.com/35073890/142782046-f25703ab-bdb9-4dc2-9a56-fbbbb045801a.mp4
 
-All jokes aside WUPHF is a reference to an episode of **The Office** [More Information](https://en.wikipedia.org/wiki/WUPHF.com). WUPHF uses a github Action build around the Python Apprise package. The package allows you to send a notification to almost all popular notification services. 
+All jokes aside **WUPHF** is a reference to an episode of **The Office** [More Information](https://en.wikipedia.org/wiki/WUPHF.com). WUPHF uses a github Action build around the Python Apprise package. The package allows you to send a notification to almost all popular notification services. 
