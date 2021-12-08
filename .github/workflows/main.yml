@@ -44,7 +44,7 @@ jobs:
           APPRISE_Pushover,
           APPRISE_PushSafer,
           APPRISE_Reddit,
-          APPRISE_Rocket.Chat,
+          APPRISE_Rocket_Chat,
           APPRISE_Ryver,
           APPRISE_SendGrid,
           APPRISE_SimplePush,
@@ -59,7 +59,7 @@ jobs:
           APPRISE_Twist,
           APPRISE_XBMC,
           APPRISE_XMPP,
-          APPRISE_Webex_Teams_(Cisco),
+          APPRISE_Webex_Teams_Cisco,
           APPRISE_Zulip_Chat
         ]
     env:
