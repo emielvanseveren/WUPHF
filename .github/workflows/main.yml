@@ -39,7 +39,7 @@ jobs:
           APPRISE_Prowl,
           APPRISE_PushBullet,
           APPRISE_Pushjet,
-          APPRISE_Push_(Techulus),
+          APPRISE_Push_Techulus,
           APPRISE_Pushed,
           APPRISE_Pushover,
           APPRISE_PushSafer,
